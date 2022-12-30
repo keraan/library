@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    margin: 0px;
+    font-family: Roboto;
+}
+
+header {
+    height: 8vh;
+    font-size: 24px;
+    font-family: monospace;
+    padding: 20px;
+}
+
+.footer {
+    display: block;
+    margin: 20px;
+    text-align: center;
+}
+
+.container {
+    display:none;
+    flex-direction: column;
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 300px; /* Need a specific value to work */
+    height: 350px;
+    filter: blur(0px);
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+    filter: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.input, .container button {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+#container {
+    background-color: darkgrey;
+    padding: 20px;
+    position: relative;
+    min-height: 77vh;
+}
+
+.button-container {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;;
+}
+
+.shelf {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 200px;
+    gap: 20px;
+}
+
+.book {
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 20px;
+    border-radius: 15px;;
+    transition: all 1s;
+}
+
+.book:hover {
+    transform: scale(1.05);
+}
+
+.title {
+    font-weight: bold;
+}
+
+#box {
+    background-color: yellow;
+}
+
+.remove {
+    opacity: 0;
+    transition: all 1s;
+    width: 10%;
+    background: none;
+    border: 0.5px solid black;
+    border-radius: 5px;
+    margin-left: 90%
+}
+
+.book:hover .remove {
+    opacity: 1;
+}
+
+.remove:hover {
+    transform: scale(1.2);
+    background-color: pink;
+}
+
