@@ -32,16 +32,19 @@ const newBookBtn = document.querySelector('.new-book-btn')
 const newBookFormContainer = document.querySelector('#new-book-form-container')
 const closeBtn = document.querySelector('.close-btn')
 const container = document.querySelector('#container')
+const overlay = document.querySelector('#overlay')
 
 
 //event listeners
 newBookBtn.addEventListener('click', () => {
-    newBookFormContainer.style.display = 'grid'
+    newBookFormContainer.classList.add('active')
+    overlay.style.display = 'block'
     //container.style.filter = 'blur(8px)'
 })
 
 closeBtn.addEventListener('click', () => {
-    newBookFormContainer.style.display = 'none'
+    newBookFormContainer.classList.remove('active')
+    overlay.style.display = 'none'
     container.style.filter = 'blur(0px)'
 })
 

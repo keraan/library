@@ -19,29 +19,26 @@ header {
 }
 
 .container {
-    display:none;
-    flex-direction: column;
-    position: absolute; 
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
-    width: 300px; /* Need a specific value to work */
-    height: 350px;
-    filter: blur(0px);
-    padding: 20px;
-    background-color: white;
-    text-align: center;
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    padding:10px;
     border-radius: 10px;
-    filter: none;
+    background-color: grey;
+    text-align: center;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.2s ease-in-out;
 }
 
-.flex {
-    display: flex;
+.active {
+    display: grid;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .input, .container button {
-    width: 100%;
+    width: 300px;
     margin-bottom: 20px;
 }
 
@@ -51,6 +48,7 @@ header {
     padding: 20px;
     position: relative;
     min-height: 77vh;
+    backdrop-filter: blur(10px)
 }
 
 .button-container {
@@ -84,10 +82,6 @@ header {
     font-weight: bold;
 }
 
-#box {
-    background-color: yellow;
-}
-
 .remove {
     opacity: 0;
     transition: all 1s;
@@ -105,5 +99,40 @@ header {
 .remove:hover {
     transform: scale(1.2);
     background-color: pink;
+}
+
+.new-book-btn {
+    background: none;
+    transition: all 0.5s;
+    border-radius: 10px;
+}
+
+.new-book-btn:hover {
+    transform: scale(1.05)
+}
+
+.blur {
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    filter: blur(10px);
+
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    text-align: center;
+    border-radius: 10px;
+    filter: none;
+    transition: all 1s;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 

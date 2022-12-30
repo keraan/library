@@ -12,22 +12,21 @@
   </header>
   <body>
     <div id="container">
-      <div class="button-container"><button class="new-book-btn">NEW BOOK</button></div>
-      <div id="new-book-form-container" class="container">
-        <form id="new-book-form" class="new-book-form" action="POST">
-          <h1>Add New Book</h1>
-          <input id="title" type="text" class="input" placeholder="Title" required>
-          <input id="author" type="text" class="input" placeholder="Author" required>
-          <input id="pages" type="number" class="input" placeholder="Pages" required>
-          <label for="read">Read?</label>
-          <input id="read" type="checkbox" class="input" value="off">
-        </form>
-        <button form="new-book-form" class="submit-btn">Submit</button>
-        <button class="close-btn">Close</button>
-      </div>
-
-      <div class="shelf">
-      </div>
+      <div class="button-container"><button class="new-book-btn">ADD NEW BOOK</button></div>
+      <div class="shelf"></div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+    <div id="new-book-form-container" class="container">
+      <form id="new-book-form" class="new-book-form" action="POST">
+        <h1>Add New Book</h1>
+        <input id="title" type="text" class="input" placeholder="Title" required>
+        <input id="author" type="text" class="input" placeholder="Author" required>
+        <input id="pages" type="number" class="input" placeholder="Pages" required>
+        <label for="read">Read?</label>
+        <input id="read" type="checkbox" class="input" value="off">
+      </form>
+      <button form="new-book-form" class="submit-btn">Submit</button>
+      <button class="close-btn">Close</button>
     </div>
     <div class="footer">
       Library for The Odin Project, by Kieren Huynh
