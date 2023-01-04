@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Library</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <header>
-    library
-  </header>
+  <header>library</header>
   <body>
     <div id="container">
-      <div class="button-container"><button class="new-book-btn">ADD NEW BOOK</button></div>
+      <div class="button-container">
+        <button class="new-book-btn">ADD NEW BOOK</button>
+      </div>
       <div class="shelf"></div>
     </div>
     <div id="overlay" class="overlay"></div>
     <div id="new-book-form-container" class="container">
-      <form id="new-book-form" class="new-book-form" action="POST">
+      <form id="new-book-form" class="new-book-form" action="GET">
         <h1>Add New Book</h1>
-        <input id="title" type="text" class="input" placeholder="Title" required>
-        <input id="author" type="text" class="input" placeholder="Author" required>
-        <input id="pages" type="number" class="input" placeholder="Pages" required>
+        <input
+          id="title"
+          type="text"
+          class="input"
+          placeholder="Title"
+          required
+        />
+        <input
+          id="author"
+          type="text"
+          class="input"
+          placeholder="Author"
+          required
+        />
+        <input
+          id="pages"
+          type="number"
+          class="input"
+          placeholder="Pages"
+          required
+        />
         <label for="read">Read?</label>
-        <input id="read" type="checkbox" class="input" value="off">
+        <input id="read" type="checkbox" class="input" value="off" />
       </form>
       <button form="new-book-form" class="submit-btn">Submit</button>
       <button class="close-btn">Close</button>
     </div>
-    <div class="footer">
-      Library for The Odin Project, by Kieren Huynh
-    </div>
-	<script src="index.js"></script>
+    <div class="footer">Library for The Odin Project, by Kieren Huynh</div>
+    <script src="index.js"></script>
   </body>
 </html>

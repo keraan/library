@@ -1,152 +1,166 @@
-//library stuff
-const shelf = document.querySelector('.shelf')
-let myLibrary = []
+//Library class
 
-const readMoji = {
-    on: '✔️',
-    undefined: '🗙',
-    off: '🗙',
-}
+class Library {
+    constructor() {}
+    
+    shelf = document.querySelector('.shelf')
 
-//book card
+    readMoji = {
+        on: '✔️',
+        undefined: '🗙',
+        off: '🗙',
+    }
+    myLibrary = []
 
-let currentBookCard = {
-    id: '',
-    title: '',
-    author: '',
-    pages: '',
-    read: '',
-}
+    currentBookCard = {
+        id: '',
+        title: '',
+        author: '',
+        pages: '',
+        read: '',
+    }
 
-//form
-const titleInput = document.querySelector('#title')
-const authorInput = document.querySelector('#author')
-const pagesInput = document.querySelector('#pages')
-const readInput = document.querySelector('#read')
-const submitBtn = document.querySelector('.submit-btn')
+    addBookToLibrary(title, author, pages, read) {
+        library.myLibrary.push(new Book(title, author, pages, read))
+        this.updateLibrary()
+    }
 
+    updateLibrary() {
+        this.shelf.innerHTML = ''
+        this.myLibrary.forEach(book => {
+            this.shelf.innerHTML += `
+            <div id="${book.getIndex()}" class='book'>
+                <button class="remove">X</button>
+                <div class="title">${book.title}</div>
+                <div class="author">${book.author}</div>
+                <div class="pages">Pages: ${book.pages}</div>
+                <div class="read">Read? ${this.readMoji[book.read]}</div>
+                <button class="mark-as-read">Mark As Read</button>
+            </div>`
+        })
+        this.run()
+    }
+    
+    updateCurrentBook() {
+        const books = document.querySelectorAll('.book')
+        books.forEach(book => book.addEventListener('mouseover', (e) => {
+            if(e.target.id) {
+                this.currentBook = this.myLibrary[e.target.id]
+                this.currentBookCard.id = e.target.id
+                this.currentBookCard.title = this.currentBook.title
+                this.currentBookCard.author = this.currentBook.author
+                this.currentBookCard.pages = this.currentBook.pages
+                this.currentBookCard.read = this.currentBook.read 
+            }
+        }))
+    }
 
+    removeFunction() {
+        const removeBtn = document.querySelectorAll('.remove')
+    
+        removeBtn.forEach(remove => remove.addEventListener('click', (e) => {
+            this.myLibrary.splice(this.currentBookCard.id, 1)
+            this.updateLibrary()
+        }))
+    }
 
-//html
-const newBookBtn = document.querySelector('.new-book-btn')
-const newBookFormContainer = document.querySelector('#new-book-form-container')
-const closeBtn = document.querySelector('.close-btn')
-const container = document.querySelector('#container')
-const overlay = document.querySelector('#overlay')
+    markAsReadFunction() {
+        const markAsReadBtn = document.querySelectorAll('.mark-as-read')
+    
+        markAsReadBtn.forEach(a => a.addEventListener('click', (e) => {
+            this.myLibrary[this.currentBookCard.id].read == 'off'? (this.myLibrary[this.currentBookCard.id].read = 'on') : (this.myLibrary[this.currentBookCard.id].read = 'off') 
+            this.updateLibrary()
+        }))
+    }
 
-
-//event listeners
-newBookBtn.addEventListener('click', () => {
-    newBookFormContainer.classList.add('active')
-    overlay.style.display = 'block'
-    //container.style.filter = 'blur(8px)'
-})
-
-closeBtn.addEventListener('click', () => {
-    newBookFormContainer.classList.remove('active')
-    overlay.style.display = 'none'
-    container.style.filter = 'blur(0px)'
-})
-
-submitBtn.addEventListener('click', () => {
-    console.log(readInput.value)
-    addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, readInput.value)
-    clearForm()
-})
-
-readInput.addEventListener('click', () => {
-    readInput.value = readInput.value == 'off' ? readInput.value = 'on' : readInput.value ='off'
-})
-
-function clearForm() {
-    titleInput.value = null
-    authorInput.value = null
-    pagesInput.value = null
-}
-
-
-function Book(title, author, pages, read) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-    this.getIndex = () => {
-        return myLibrary.indexOf(this)
+    run() {
+        this.removeFunction()
+        this.markAsReadFunction()
+        document.body.onmouseover = this.updateCurrentBook()
     }
 }
 
-function addBookToLibrary(title, author, pages, read) {
-    myLibrary.push(new Book(title, author, pages, read))
-    console.table(myLibrary)
-    updateLibrary()
+//Form
+
+class Form {
+    constructor () {}
+
+    titleInput = document.querySelector('#title')
+    authorInput = document.querySelector('#author')
+    pagesInput = document.querySelector('#pages')
+    readInput = document.querySelector('#read')
+    submitBtn = document.querySelector('.submit-btn')
+    closeBtn = document.querySelector('.close-btn')
+
+    
+
+    submitBtnListener = (() => this.submitBtn.addEventListener('click', () => {
+        console.log(this.readInput.value)
+        console.log('hello')
+        library.addBookToLibrary(this.titleInput.value, this.authorInput.value, this.pagesInput.value, this.readInput.value)
+        this.clearForm()
+    }))()
+
+    readInputListener = (() => this.readInput.addEventListener('click', () => {
+        this.readInput.value = this.readInput.value == 'off' ? this.readInput.value = 'on' : this.readInput.value ='off'
+    }))()
+
+    
+    closeBtnListener = (() => this.closeBtn.addEventListener('click', () => {
+        html.newBookFormContainer.classList.remove('active')
+        html.overlay.style.display = 'none'
+        html.container.style.filter = 'blur(0px)'
+    }))()
+
+    
+    clearForm() {
+        this.titleInput.value = null
+        this.authorInput.value = null
+        this.pagesInput.value = null
+    }
 }
 
-function updateLibrary() {
-    shelf.innerHTML = ''
-    myLibrary.forEach(book => {
-        shelf.innerHTML += `
-        <div id="${book.getIndex()}" class='book'>
-            <button class="remove">X</button>
-            <div class="title">${book.title}</div>
-            <div class="author">${book.author}</div>
-            <div class="pages">Pages: ${book.pages}</div>
-            <div class="read">Read? ${readMoji[book.read]}</div>
-            <button class="mark-as-read">Mark As Read</button>
-        </div>`
-    })
-    run()
+//Book
+
+class Book {
+    constructor (title, author, pages, read) {
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.read = read
+    }
+
+    getIndex = () => {
+        return library.myLibrary.indexOf(this)
+    }
+
 }
 
 
+//html
+class HTML {
+    constructor(){}
 
+    newBookBtn = document.querySelector('.new-book-btn')
+    newBookFormContainer = document.querySelector('#new-book-form-container')
+    container = document.querySelector('#container')
+    overlay = document.querySelector('#overlay')
 
-
-
-
-
-
-function updateCurrentBook() {
-    const books = document.querySelectorAll('.book')
-    books.forEach(book => book.addEventListener('mouseover', (e) => {
-        if(e.target.id) {
-            id = e.target.id
-            currentBook = myLibrary[id]
-            currentBookCard.id = id
-            currentBookCard.title = currentBook.title
-            currentBookCard.author = currentBook.author
-            currentBookCard.pages = currentBook.pages
-            currentBookCard.read = currentBook.read 
-        }
-    }))
+    newBookBtnListener = (() => this.newBookBtn.addEventListener('click', () => {
+        this.newBookFormContainer.classList.add('active')
+        this.overlay.style.display = 'block'
+    }))()
 }
 
-function removeFunction() {
-    const removeBtn = document.querySelectorAll('.remove')
 
-    removeBtn.forEach(remove => remove.addEventListener('click', (e) => {
-        myLibrary.splice(currentBookCard.id, 1)
-        updateLibrary()
-    }))
-}
+//init
 
-function markAsReadFunction() {
-    const markAsReadBtn = document.querySelectorAll('.mark-as-read')
-
-    markAsReadBtn.forEach(a => a.addEventListener('click', (e) => {
-        myLibrary[currentBookCard.id].read == 'off'? (myLibrary[currentBookCard.id].read = 'on') : (myLibrary[currentBookCard.id].read = 'off') 
-        updateLibrary()
-    }))
-}
-
-function run() {
-    removeFunction()
-    markAsReadFunction()
-    document.body.onmouseover = updateCurrentBook()
-}
-
+const form = new Form()
+const library = new Library('zawarudo')
+const html = new HTML()
 
 // existing books
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', '293', 'on')
-addBookToLibrary('Harry Potter', 'J.K. Rowling', '293', 'on')
-addBookToLibrary('The Peripheral', 'William Gibson', '293', 'on')
-addBookToLibrary('Pachinko', 'Min Jin Lee', '293', 'off')
+library.addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', '223', 'on')
+library.addBookToLibrary('Harry Potter', 'J.K. Rowling', '345', 'on')
+library.addBookToLibrary('The Peripheral', 'William Gibson', '134', 'on')
+library.addBookToLibrary('Pachinko', 'Min Jin Lee', '293', 'off')
